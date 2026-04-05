@@ -30,11 +30,9 @@ The implementation was carried out in multiple stages to simulate a real data en
 ## Data Extraction
 
 The first step was loading raw datasets from CSV files into PySpark DataFrames.
-```python
-df = spark.read.format("csv") \
+ df = spark.read.format("csv") \
 .option("header","true") \
 .load("/samples/customers.csv")
-```python
 
 This step represents the Extract stage of the ETL pipeline.
 
@@ -42,10 +40,8 @@ This step represents the Extract stage of the ETL pipeline.
 
 Before performing transformations, the structure of the dataset was inspected using:
 
-```python
 df.show()
 df.printSchema()
-```python
 
 This helped identify:
 
@@ -66,10 +62,8 @@ Validating dataset integrity
 
 Example:
 
-```python
 clean_df = df.dropna()
 filtered_df = clean_df.filter(clean_df.age > 0)
-```python
 
 ## Data Transformation
 
@@ -83,11 +77,10 @@ Joining datasets using customer_id
 Calculating summary metrics
 
 --Example transformation:
-```python
+
 customers.join(sales,"customer_id") \
 .groupBy("city") \
 .sum("amount")
-```python
 
 ## Building the Data Pipeline
 
@@ -114,17 +107,17 @@ This pipeline structure represents how real data engineering systems process lar
 ## Key PySpark Operations Used
 
 The following PySpark functions were used throughout the pipeline:
-
-Operation	Purpose
-read()	Load data from files
-show()	Preview dataset
-printSchema()	Inspect schema
-dropna()	Remove missing values
-fillna()	Replace null values
-filter()	Remove invalid records
-join()	Combine datasets
-groupBy()	Perform aggregations
-sum() / count()	Calculate metrics
+| Operation           | Purpose                |
+| ------------------- | ---------------------- |
+| `read()`            | Load data from files   |
+| `show()`            | Preview dataset        |
+| `printSchema()`     | Inspect schema         |
+| `dropna()`          | Remove missing values  |
+| `fillna()`          | Replace null values    |
+| `filter()`          | Remove invalid records |
+| `join()`            | Combine datasets       |
+| `groupBy()`         | Perform aggregations   |
+| `sum()` / `count()` | Calculate metrics      |
 
 These operations form the core building blocks of PySpark data processing pipelines.
 
@@ -155,25 +148,25 @@ These practices help ensure the pipeline remains reliable and scalable.
 
 Some challenges faced during this phase included:
 
-Handling null values in CSV datasets
-Dealing with incorrect data types
-Writing accurate join conditions
-Structuring the pipeline logically
-Translating SQL logic into PySpark operations
+- Handling null values in CSV datasets
+- Dealing with incorrect data types
+- Writing accurate join conditions
+- Structuring the pipeline logically
+- Translating SQL logic into PySpark operations
 
 Overcoming these challenges helped strengthen understanding of real-world data processing.
 
-##Key Learnings
+## Key Learnings
 
 Through this phase, several important data engineering concepts were learned:
 
-Real datasets are rarely clean and require preprocessing
-Schema validation is essential before performing transformations
-ETL pipelines provide a structured way to process data
-PySpark enables efficient processing of large datasets
-Thinking in terms of pipelines rather than isolated queries is crucial for data engineers
+- Real datasets are rarely clean and require preprocessing
+- Schema validation is essential before performing transformations
+- ETL pipelines provide a structured way to process data
+- PySpark enables efficient processing of large datasets
+- Thinking in terms of pipelines rather than isolated queries is crucial for data engineers
 
-##Conclusion
+## Conclusion
 
 Phase 3 introduced the concept of building structured ETL pipelines using PySpark. By reading raw data, cleaning inconsistencies, applying transformations, and generating insights, a complete data processing workflow was created.
 
