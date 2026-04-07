@@ -1,7 +1,9 @@
 ## Day 1 – Data Preprocessing and ETL using PySpark
---> Objective
 
-The objective of Day 1 training was to understand the basic ETL (Extract → Transform → Load) workflow using PySpark.
+## Objective
+
+The objective of Day 1 training was to understand the basic ```
+ETL (Extract → Transform → Load) ``` workflow using PySpark.
 We worked with a sample dataset and performed several data preprocessing steps such as reading the dataset, cleaning missing values, handling duplicates, and standardizing column values.
 
 This exercise helped us understand how raw datasets are prepared before performing analytics or building data pipelines.
@@ -10,18 +12,18 @@ This exercise helped us understand how raw datasets are prepared before performi
 
 The sample dataset contained the following columns:
 
-CustomerID – Unique identifier for each customer
-Name – Name of the customer
-Country – Country of the customer
-JoinDate – Date when the customer joined
-Sales – Sales amount associated with the customer
-Category – Customer category
+- CustomerID – Unique identifier for each customer
+- Name – Name of the customer
+- Country – Country of the customer
+- JoinDate – Date when the customer joined
+- Sales – Sales amount associated with the customer
+- Category – Customer category
 
 While inspecting the dataset, several issues were observed such as:
 
 Missing values in Sales and Category
-Blank values represented as "blank" or "Blank"
-Inconsistent formatting in Country names (e.g., india, India)
+Blank values represented as ``` "blank" or "Blank" ```
+Inconsistent formatting in Country names ```(e.g., india, India)```
 Potential duplicate records
 
 These issues needed to be cleaned before further processing.
@@ -30,59 +32,71 @@ These issues needed to be cleaned before further processing.
 
 The dataset was processed through the following ETL steps:
 
-1️. Data Extraction
+```1️. Data Extraction```
 
 The dataset was read from the catalog using PySpark.
+```python
 df = spark.read.csv("/Volumes/day1/default/sample1", header=True, inferSchema=True)
 
 df.display()
 df.show()
+```
 
-2. Handling Blank Values
+```2. Handling Blank Values```
 
 Some fields contained "blank" or "Blank" instead of proper null values.
 These were replaced with None so that PySpark can treat them as missing values.
+```python
 df = df.replace(["blank","Blank"], None)
+```
 
-3. Standardizing Country Names
+```3. Standardizing Country Names```
 
 Country names appeared with inconsistent casing such as india and India.
 To maintain consistency, all country names were converted to uppercase.
 
+```python
 from pyspark.sql.functions import upper, col
 
 df = df.withColumn("Country", upper(col("Country")))
+```
 
-4️. Handling Missing Join Dates
+```4️. Handling Missing Join Dates```
 
 If the JoinDate column contained null values, they were handled to ensure proper formatting.
 
+```python
 from pyspark.sql.functions import when
 
 df = df.withColumn("joinDate",
                    when(col("joinDate").isNull(), None)
                    .otherwise(col("joinDate")))
+```
 
-5️. Filling Missing Values
+```5️. Filling Missing Values```
 
 Missing values in Category and Sales were replaced with default values.
 
+```python
 Category → "Unknown"
 Sales → "0"
 df = df.fillna({
     "Category": "Unknown",
     "Sales": "0"
 })
+```
 
 This ensures the dataset does not contain empty values for these columns.
 
-6️. Filtering Data
+```6️. Filtering Data```
 
 Records where Sales equals 0 were filtered to inspect customers with no sales activity.
 
+```python
 df = df.filter(col("Sales") == 0)
 
 df.display()
+```
 
 ## Final Output
 
