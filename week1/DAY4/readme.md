@@ -2,24 +2,29 @@
 
 ## Objective
 
-This assignment helped me understand how to use SQL functions to clean, transform, and analyze data.
-I learned how to combine string, numeric, date, NULL handling, and CASE logic to solve real-world problems.
+This assignment helped me understand how to use SQL functions to ```clean, transform, and analyze``` data.
+I learned how to combine ```string, numeric, date, NULL handling, and CASE logic``` to solve real-world problems.
 
 ## Concepts Covered
 
-1. String Functions
+## String Functions
 
 Used to manipulate text data.
 
 Functions I used:
 
 ```UPPER() → convert to uppercase```
+
 ```LOWER() → convert to lowercase```
+
 ```INITCAP() → capitalize first letter```
+
 ```SUBSTRING() / RIGHT() → extract part of string```
+
 ```LENGTH() → find string length```
 
 Example:
+
 ```sql
 SELECT UPPER(name), INITCAP(name)
 FROM table;
@@ -27,20 +32,26 @@ FROM table;
 
 --> Used for formatting names and extracting values like email domain.
 
-2. Numeric Functions
+## Numeric Functions
 
 Used for calculations and formatting numbers.
 
 Functions I used:
 
 ```ROUND() → round values```
+
 ```TRUNCATE() → remove decimals```
+
 ```CEIL() → round up```
+
 ```FLOOR() → round down```
+
 ```ABS() → convert to positive```
+
 ```MOD() → remainder (used for patterns)```
 
 Example:
+
 ```sql
 SELECT ROUND(salary), ABS(balance)
 FROM table;
@@ -48,18 +59,22 @@ FROM table;
 
 --> Used for salary calculations, percentages, and pattern logic.
 
-3. Date Functions
+## Date Functions
 
 Used to handle date and time values.
 
 Functions I used:
 
 ```DATEDIFF() → difference between dates```
+
 ```CURRENT_DATE → today’s date```
+
 ```YEAR(), MONTH() → extract parts```
+
 ```DATE_FORMAT() → display month/day name```
 
 Example:
+
 ```sql
 SELECT DATEDIFF(current_date, join_date)
 FROM table;
@@ -67,7 +82,7 @@ FROM table;
 
 --> Used for experience, delays, and duration calculations.
 
-4. NULL Handling
+## NULL Handling
 
 NULL means missing or unknown data.
 
@@ -83,7 +98,7 @@ Returns the first non-null value.
 
 Helps avoid calculation errors.
 
-5. CASE Statement
+## CASE Statement
 
 Used for conditional logic.
 
