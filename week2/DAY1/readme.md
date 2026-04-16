@@ -96,7 +96,7 @@ By completing this notebook, you will:
 ## Tools Used
 
 * SQL
-* Databricks / Jupyter Notebook
+* Databricks Notebook
 
 ---
 
